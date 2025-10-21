@@ -1,6 +1,44 @@
-##è¯»æˆ‘ (README.md)
--æ­¤BOTæºç å·²åœ¨Githubå¼€æº
+##¶ÁÎÒ (README.md)##
+-´ËBOTÔ´ÂëÒÑÔÚGithub¿ªÔ´
+-ÐèOneBot 11Ð­Òé
+
 https://github.com/xhong-org/qqbot
-ç›®å‰ä»ç„¶å¼€å‘ä¸­
+
+Ä¿Ç°ÈÔÈ»¿ª·¢ÖÐ
 Updated 2025.10.21(Beta)
 
+Tips:  ±¾Bot²»ÐèÒªat»úÆ÷ÈËÔÚÊäÈëÖ¸Áî,Í¬Ê±ÎªÁËÎó´¥·¢,²¿·ÖÖ¸Áî¿ªÍ·¶¼¼ÓÈëÁË·´Ð±¸Ü"/"
+»¹ÓÐ"<text>"ºÍ"</text>"ÊÇ±íÊ¾¿ªÊ¼ºÍ½áÊø,Ã»É¶ÓÃ´¦,ÎÒÏ¹¼¸°ÑÐ´µÄ
+»¹ÓÐÖ¸Áî´ø²ÎÊýµÄÓÉ"<arg>"»ò"[arg]"±íÊ¾,·Ö±ðÎª±ØÑ¡²ÎÊýºÍ¿ÉÑ¡²ÎÊý.±ØÑ¡²ÎÊý,×ÖÃæÒâË¼,±ØÐëÌîÈë²ÎÊý²ÅÄÜÔËÐÐ.¿ÉÑ¡²ÎÊý,×ÖÃæÒâË¼,¿ÉÌî¿É²»Ìî
+Èç¹ûÄã¿´µ½ÁËÒ»Ð©Ö¸ÁîµÄ²ÎÊý°ïÖúÎª" ["text"[arg1]] " ÕâÑùµÄ
+¿ÉÒÔÀí½âÎª:ÕâÊÇÒ»¸ö¿ÉÑ¡²ÎÊý,ÓÐÐèÒªÌîµÄ»°,Äã±ØÐë°Ñ¿ÉÑ¡²ÎÊýÀïË«ÒýºÅÀ¨×¡µÄtextÐ´³öÀ´,È»ºóÄãÔÙ¿¼ÂÇ×Ó¿ÉÑ¡²ÎÊýÒª²»ÒªÌî
+Ê¾ÀýÖ¸Áî:
+/xxx ["text"[arg1]]
+/xxx ["ttt"<arg>]
+/xxx <"emmm"[arg2]>
+Ê¾ÀýÓÃ·¨:
+/xxx text114514abcd »ò /xxx text»ò /xxx
+/xxx ttt114514abcd »ò /xxx
+/xxx emmm »ò /xxx emmm114514ahcd
+
+
+##Ö¸Áî°ïÖú##
+
+Latest(Beta): ×îÐÂµ«ÊÇ²âÊÔ·ÖÖ§
+±£ÁôÁËMainÒÔÏÂÖ¸Áî
+
+Tips: "->"±íÊ¾¸ü¸ÄµÄÖ¸ÁîÃû,×÷ÓÃ²»±ä
+<rewrite>
+- /bot-sign
+- /bot-test
+- /bot-status
+- /bot-say
+- /bot-info
+- /mc-ping -> /mc-ping
+</rewrite>
+
+<begin>
+- ÎÒÒªÒÚÕÅÉñÃØÐ¡Í¼Æ¬ ["-R18-"<bool>] ["-AI-"<bool>] #Ëæ»ú»ñÈ¡PÕ¾×÷Æ·.boolÊÇ²¼¶ûÖµ,²¼¶ûÖµÊÇÊ²Ã´ÍøÉÏËÑ,trueÎªÊÇ,falseÎª·ñ,ÖµµÃÒ»ÌáÊÇ,¼´Ê¹·ñ¶¨R18»òAIÈÔÈ»»áÓÐR18»òAI³É·Ö.Ä¬ÈÏÖ»·¢ËÍ"ÎÒÒªÒÚÕÅÉñÃØÐ¡Í¼Æ¬"µÄ»°,·ñ¶¨R18ºÍAI±êÇ©µÄ.
+- ÃþÍ· [at] #Éú³ÉÃþÍ·Ïñ±íÇé°ü,Ä¬ÈÏ²»ÌîÉú³É·¢ËÍÕßµÄÍ·Ïñ
+- ÔÞÎÒ #¸øÄãµã10¸öÔÞ,¼ÇµÃ»ØÔÞÅ¶
+</begin>
