@@ -1,27 +1,5 @@
-##¶ÁÎÒ (README.md)##
--´ËBOTÔ´ÂëÒÑÔÚGithub¿ªÔ´
+##è¯»æˆ‘ (README.md)##
+-æ­¤BOTæºç å·²åœ¨Githubå¼€æº
 https://github.com/xhong-org/qqbot
-Ä¿Ç°ÈÔÈ»¿ª·¢ÖÐ
+ç›®å‰ä»ç„¶å¼€å‘ä¸­
 Updated 2025.10.21(Beta)
-
-##Ö¸Áî°ïÖú##
-Legacy(Main): ¾É·ÖÖ§,ÏÖÔÚÒÀÈ»µ±×öÖ÷·ÖÖ§À´ÓÃ
-- /bot-sign #Ç©µ½,¿É»ñÈ¡Ó²±Ò,µ«ÊÇÔÚLegacy·ÖÖ§ºÁÎÞ×÷ÓÃ,Äã¿ÉÒÔ×ÔÖ÷¿ª·¢
-- /bot-info #²é¿´¸öÈËÐÅÏ¢.»ñÈ¡µ±Ç°Ó²±ÒÊýÒÔ¼°ÆäËûÐÅÏ¢,µ«ÊÇ²»°üÀ¨QQ¸öÈËÐÅÏ¢(ÒòÎªÎÒÍüÁËÐ´
-- /bot-say <text> #¿ÉÒÔÈÃbot·¢ËÍÏûÏ¢,µ«ÊÇ²¢Ã»ÓÐÆÁ±ÎÎ¥½û´Ê,¼òµ¥À´Ëµ,textÓÐÊ²Ã´¾Í·¢Ê²Ã´
-- /bot-help #ÓÃÓÚ²é¿´Ö¸ÁîÓÃ·¨
-- /bot-op <qq_num | at> #ÊÚÓèÄ³ÈËbot¹ÜÀíÈ¨ÏÞ,¿ÉÒÔÊäÈëQQºÅ»òÕßÔÚÈºÀïatÄ³ÈËÊÚÓè
-- /bot-deop <qq_num | at> #³·ÏúÄ³ÈËbotÈ¨ÏÞ,Í¬ÉÏ
-- /bot-status #²é¿´Ö÷»ú×´Ì¬
-- /bot-test #²âÊÔÓÃµÄ
-- /bot-reload #ÖØÐÂ¶ÁÈ¡µµ°¸ÎÄ¼þ
-- /bot-save #±£´æÅäÖÃÎÄ¼þ
-- /bot-update #ÖØÆôbotÓÃµÄ
-- /mc-cmd <command> #Í¨¹ýRconÏò·¢ËÍMCServerÃüÁî
-- /tps #²é¿´$mc_address±äÁ¿µÄµØÖ·µÄMinecraft·þÎñÆ÷µ±Ç°tps,½öÊÊºÏÓÃÓÚForge¶Ë·þÎñÆ÷
-- /list #²é¿´$mc_address±äÁ¿µÄµØÖ·µÄMinecraft·þÎñÆ÷µ±Ç°ÈËÊý
-- /s <message> #²é¿´$mc_address±äÁ¿µÄµØÖ·µÄMinecraft·þÎñÆ÷·¢ËÍÓÎÏ·ÏûÏ¢
-- /2fa-bind <key> #°ó¶¨2FAÃØÔ¿,ÉÏÏÞ10¸ö,µ±È»Äã¿ÉÒÔ¸Ä
-- /2fa-info #²é¿´µ±Ç°ÒÑ¾­°ó¶¨µÄ2FAÃØÔ¿,ÁôÒâID,Õâ¸öÊÇÓÃÀ´²Ù×÷½â°óÃØÔ¿ºÍ·¢ËÍÒ»´ÎÐÔÑéÖ¤ÂëµÄ²ÎÊý
-- /2fa-unbind <id> #½â°ó2FAÃØÔ¿,idÊÇÊ²Ã´¿´¿´ÉÏÃæ
-- /2fa-getcode <id> #»ñÈ¡Ò»´ÎÐÔÑéÖ¤Âë,ÓÐÐ§Ê±¼äÎª30Ãë,idÊÇÊ²Ã´¿´¿´ÉÏÃæ
