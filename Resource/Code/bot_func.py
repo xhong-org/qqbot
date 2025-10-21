@@ -16,18 +16,21 @@ class MakeMsgClass:
     def makeMsgImage(file:str , desc:str = '[Image]')->dict:
         return({'type': 'image','data': {'file': file,'summary': desc}})
 
-    #
+    # 发送文件结构
+    def makeMsgFile(file:str)->dict:
+        return({'type': 'file','data': {'file': file}})
 
-url = "http://127.0.0.1:3000/"
+url = "http://127.0.0.1:3005/"
 
 # 脚本部分
 class group_import_func:
     def setPort(port:int)->bool:
+        global url
         url = f"http://127.0.0.1:{port}/"
         try:
             # 设置请求头，进行UA伪装
             headers = {
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Mobile Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Mobile Safari/537.36'
             }
 
             # 发送GET请求
@@ -124,7 +127,7 @@ class group_import_func:
 
         return(response.text)
 
-    def delete_msg(msg_id:str)->dict:
+    def del_msg(msg_id:str)->dict:
         req = f"{url}delete_msg"
 
         payload = json.dumps({
@@ -134,12 +137,12 @@ class group_import_func:
            'Content-Type': 'application/json'
         }
 
-        response = requests.request("POST", url, headers=headers, data=payload)
+        response = requests.request("POST", req, headers=headers, data=payload)
 
         return(response.text)
 
     def send_group_msg(group_id:str,msg_list:list)->dict:
-        url = "/send_group_msg"
+        req = f"{url}send_group_msg"
 
         payload = json.dumps({
            "group_id": group_id,
@@ -149,9 +152,48 @@ class group_import_func:
            'Content-Type': 'application/json'
         }
 
-        response = requests.request("POST", url, headers=headers, data=payload)
+        response = requests.request("POST", req, headers=headers, data=payload)
     
-        return(respone.text)
+        return(json.loads(response.text))
+
+    def parseWebMsg(dc:dict)->dict:
+        try:
+            res = {
+                'status' : True,
+                'self_id' : dc['self_id'],
+                'msg_id' : dc['message_id'],
+                'sender' : {
+                    'id' : str(dc['user_id']),
+                    'name' : dc['sender']['nickname'],
+                    'message' : dc['raw_message']
+                },
+                
+                'type' : dc['message_type'],
+                'msg_structor' : dc['message'],
+                'group_info' : {
+                    'id' : str(dc['group_id']),
+                    'name' : dc['group_name']
+                }
+                
+            }
+        except:
+            return({'status' : False})
+        else:
+            return(res)
+
+    def send_like(num:str, time:int = 10):
+        req = f"{url}send_like"
+
+        payload = json.dumps({
+            "user_id": num,
+            "times": time
+        })
+        headers = {
+            'Content-Type': 'application/json'
+        }
+
+        response = requests.request("POST", req, headers=headers, data=payload)
+        return(response.text)
 
 
 
