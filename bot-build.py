@@ -11,24 +11,48 @@ import os
 import wget
 import Resource.Code.user_level as user_level
 from Resource.Code.petpet import petpet
+#from Resource.Code.moutou import petpet
 import Resource.Code.custom_sign as sign
-from Resource.Code.mcping import mc_get_status as mc_get_status
+from Resource.Code.mc_status import mc_get_status_ext as mc_get_status
 #import Resource.Code.two_fa_verify as fa_v
 from Resource.Code.bot_func import group_import_func as gp_f
 from Resource.Code.bot_func import MakeMsgClass as m_f
+from Resource.Code.write_log import writeLog as writeLog
+import atexit
 
+
+readme = ''
+with open('README.md', 'r') as rm:
+    readme = rm.read()
 start = time.time()
-bot_version = 'v.1.1.0.3 - Beta Build'
+bot_version = 'v.1.1.4 - Beta'
 gp_f.setPort(3000)
 send_time = 0
 send_clamp = False
-def idk_script(dict_msg:dict):
+current_datetime = datetime.datetime.now()
+year = int(current_datetime.year)
+month = int(current_datetime.month)
+day = int(current_datetime.day)
+log_file = f'./Resource/Logs/log-{year}-{month}-{day}.log'
+del current_datetime
+del year
+del month
+del day
+
+@atexit.register
+def clean():
+    writeLog(log_file,'Debug',"Stopping service")
+
+writeLog(log_file,'Debug','Starting service')
+
+async def idk_script(dict_msg:dict):
     global send_time
     global send_clamp
+    global readme
     if(dict_msg['msg_structor'][0]['type'] == 'reply'):
         if(dict_msg['msg_structor'][1]['type'] == 'text' and dict_msg['msg_structor'][1]['data']['text'] == '撤回'):
             gp_f.del_msg(dict_msg['msg_structor'][0]['data']['id'])
-            print('114514')
+            #print('114514')
             return(True)
         else:
             return(False)
@@ -36,6 +60,8 @@ def idk_script(dict_msg:dict):
         return(False)
         
     text = ((dict_msg['msg_structor'][0]['data']['text']).split(" ",1))
+    writeLog(log_file,'Info',f"{dict_msg['sender']['name']}({dict_msg['sender']['id']}): ({dict_msg['sender']['message']})")
+    #asyncio.sleep(0.5)
     match text[0]:
         case '/bot-test' | '测试':
             gp_f.send_group_msg(
@@ -153,10 +179,10 @@ def idk_script(dict_msg:dict):
                 send_clamp = False
             ai = False
             r18 = False
-            print(text)
+            writeLog(log_file,'Debug',text)
             if(len(text) == 2):
                 sp = text[1].split(' ')
-                print(sp)
+                #print(sp)
                 match len(sp):
                     case 1:
                         if(sp[0][:5] == '-R18-'):
@@ -185,10 +211,10 @@ def idk_script(dict_msg:dict):
                     'aiType' : 1 if(ai == False) else 2,
                     'sizeList' : ['regular' for ll in range(20)]
                 })
-                print(payload)
+                writeLog(log_file,'Debug',payload)
                 url = "https://api.mossia.top/duckMo"
                 res = json.loads(requests.request("POST" , url , headers=header , data=payload).text)
-                print(res)
+                writeLog(log_file,'Debug',res)
                 if(res['success']):
                     tags = ''
                     for ii in range(len(res['data'][0]['tagsList'])):
@@ -213,7 +239,7 @@ def idk_script(dict_msg:dict):
                         )
                     send_time = time.time()
             except Exception as e:
-                print(e)
+                writeLog(log_file,'Error',e,True)
                 gp_f.send_group_msg(
                     dict_msg['group_info']['id'],
                     [
@@ -227,16 +253,16 @@ def idk_script(dict_msg:dict):
             num = dict_msg['sender']['id']
             if(len(dict_msg['msg_structor']) >= 2):
                 if(dict_msg['msg_structor'][1]['type'] == 'at'):
-                    print('Num')
+                    writeLog(log_file,'Debug','Num')
                     num = str(dict_msg['msg_structor'][1]['data']['qq'])
                 
             i = petpet(num)
-            print(i)
+            #print(i)
             if(i == True):
                 gp_f.send_group_msg(
                     dict_msg['group_info']['id'],
                     [
-                        m_f.makeMsgImage(f"D:/image-{num}.gif")
+                        m_f.makeMsgImage(os.path.abspath(f"./Resource/Images/gif-{num}.gif"))
                     ]
                 )
             else:
@@ -260,18 +286,20 @@ def idk_script(dict_msg:dict):
                 ]
             )
             return(True)
-        case '查询mc服务器状态' | '/mc-ping':
+        case '查询mc服务器信息' | '/mc-info':
             if(len(text) == 2 and len((text[1].replace(' ','')).replace('\n','')) > 0):
                 text[1] = (text[1].replace(' ','')).replace('\n','')
                 mc = mc_get_status(text[1])
-
+                lists = [
+                    m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n"),
+                    m_f.makeMsgAt(dict_msg['sender']['id']),                 
+                ]
+                if(mc['base_img'] != None):
+                    lists.append(m_f.makeMsgImage(f"base64://{mc['base_img']}"))
+                lists.append(m_f.makeMsgText('\n'+mc['msg']))
                 gp_f.send_group_msg(
                     dict_msg['group_info']['id'],
-                    [
-                        m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n"),
-                        m_f.makeMsgAt(dict_msg['sender']['id']),
-                        m_f.makeMsgText('\n'+mc['msg'])
-                    ]
+                    lists
                 )
             else:
                 gp_f.send_group_msg(
@@ -283,12 +311,20 @@ def idk_script(dict_msg:dict):
                     ]
                 )
             return(True)
+        case 'readmd':
+            gp_f.send_group_msg(
+                dict_msg['group_info']['id'],
+                [
+                    m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n{readme}"),
+                ]
+            )
+            return(True)
         case _:
             return(False)
         
-def judgeMsg(const_msg:dict):
+async def judgeMsg(const_msg:dict):
     if(const_msg['status'] and const_msg['type'] == 'group'):
-        idk_script(const_msg)
+        await idk_script(const_msg)
         return(True)
     else:
         return(False)
@@ -298,10 +334,10 @@ def judgeMsg(const_msg:dict):
     
 async def main():
     async with websockets.connect("ws://127.0.0.1:3001") as websocket:
-        print("已连接至服务器")
+        writeLog(log_file,'Info',"已连接至服务器",True)
         async for message in websocket:
             msg = json.loads(message)
-            judgeMsg(gp_f.parseWebMsg(msg))
+            await judgeMsg(gp_f.parseWebMsg(msg))
             #print(gp_f.parseWebMsg(msg))
             #print(message)
     
