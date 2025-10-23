@@ -29,16 +29,31 @@ bot_version = 'v.1.1.4 - Beta'
 gp_f.setPort(3000)
 send_time = 0
 send_clamp = False
-current_datetime = datetime.datetime.now()
-year = int(current_datetime.year)
-month = int(current_datetime.month)
-day = int(current_datetime.day)
-log_file = f'./Resource/Logs/log-{year}-{month}-{day}.log'
-del current_datetime
-del year
-del month
-del day
+log_file = ''
+def logChange():
+    global log_file
+    current_datetime = datetime.datetime.now()
+    year = int(current_datetime.year)
+    month = int(current_datetime.month)
+    day = int(current_datetime.day)
+    log = log_file
+    log_file = f'./Resource/Logs/log-{year}-{month}-{day}.log'
+    if(log_file != log and len(log) != 0):
+        gp_f.send_group_msg(
+            '921654083',
+            [
+                m_f.makeMsgText('[XTHX_BOT - Beta Build]\n'),
+                m_f.makeMsgText(f"\n({dict_msg['sender']['id']})\n日志上报中")
+            ]
+        )
+        gp_f.send_group_msg(
+            '921654083',
+            [
+                m_f.makeMsgFile(os.path.abspath(log))
+            ]
+        )
 
+logChange()
 @atexit.register
 def clean():
     writeLog(log_file,'Debug',"Stopping service")
@@ -60,7 +75,8 @@ async def idk_script(dict_msg:dict):
         return(False)
         
     text = ((dict_msg['msg_structor'][0]['data']['text']).split(" ",1))
-    writeLog(log_file,'Info',f"{dict_msg['sender']['name']}({dict_msg['sender']['id']}): ({dict_msg['sender']['message']})")
+    if(dict_msg['self_id'] != dict_msg['sender']['id']):
+        writeLog(log_file,'Info',f"群名: {dict_msg['group_info']['name']}({dict_msg['group_info']['id']})->[{dict_msg['sender']['name']}]({dict_msg['sender']['id']}): {dict_msg['sender']['message']}")
     #asyncio.sleep(0.5)
     match text[0]:
         case '/bot-test' | '测试':
@@ -334,8 +350,9 @@ async def judgeMsg(const_msg:dict):
     
 async def main():
     async with websockets.connect("ws://127.0.0.1:3001") as websocket:
-        writeLog(log_file,'Info',"已连接至服务器",True)
+        writeLog(log_file,'Debug',"已连接至服务器",True)
         async for message in websocket:
+            logChange()
             msg = json.loads(message)
             await judgeMsg(gp_f.parseWebMsg(msg))
             #print(gp_f.parseWebMsg(msg))

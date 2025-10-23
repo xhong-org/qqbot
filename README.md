@@ -8,8 +8,8 @@ https://github.com/xhong-org/qqbot
 目前仍然开发中
 QQ群:958732188
 
-Github Updated 2025.10.23(Beta)
-Local Updated 2025.10.23(Beta)
+Github Updated 2025.10.24(Beta)
+Local Updated 2025.10.24(Beta)
 
 Tips:  本Bot不需要at机器人在输入指令,同时为了误触发,部分指令开头都加入了反斜杠"/"
 还有"<text>"和"</text>"是表示开始和结束,没啥用处,我瞎几把写的
