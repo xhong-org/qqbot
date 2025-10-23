@@ -17,8 +17,11 @@ class MakeMsgClass:
         return({'type': 'image','data': {'file': file,'summary': desc}})
 
     # 发送文件结构
-    def makeMsgFile(file:str)->dict:
-        return({'type': 'file','data': {'file': file}})
+    def makeMsgFile(file:str,desc:str = '')->dict:
+        if(len(desc) == 0):
+            return({'type': 'file','data': {'file': file}})
+        else:
+            return({'type': 'file','data': {'file': file,'name':desc}})
 
 url = "http://127.0.0.1:3005/"
 
@@ -160,7 +163,7 @@ class group_import_func:
         try:
             res = {
                 'status' : True,
-                'self_id' : dc['self_id'],
+                'self_id' : str(dc['self_id']),
                 'msg_id' : dc['message_id'],
                 'sender' : {
                     'id' : str(dc['user_id']),
