@@ -8,8 +8,8 @@ https://github.com/xhong-org/qqbot
 目前仍然开发中
 QQ群:958732188
 
-Github Updated 2025.10.24(Beta)
-Local Updated 2025.10.24(Beta)
+Github Updated 2025.10.25(Beta)
+Local Updated 2025.10.25(Beta)
 
 Tips:  本Bot不需要at机器人在输入指令,同时为了误触发,部分指令开头都加入了反斜杠"/"
 还有"<text>"和"</text>"是表示开始和结束,没啥用处,我瞎几把写的
@@ -61,7 +61,7 @@ Tips: "->"表示更改的指令名,作用不变
 - /bot-test
 - /bot-status
 - /bot-say
-- /bot-info
+- /bot-info & 个人信息
 - /info -> /mc-info
 </rewrite>
 
@@ -69,4 +69,5 @@ Tips: "->"表示更改的指令名,作用不变
 - 我要亿张神秘小图片 ["-R18-"<bool>] ["-AI-"<bool>] #随机获取P站作品.bool是布尔值,布尔值是什么网上搜,true为是,false为否,值得一提是,即使否定R18或AI仍然会有R18或AI成分.默认只发送"我要亿张神秘小图片"的话,否定R18和AI标签的.
 - 摸头 [at] #生成摸头像表情包,默认不填生成发送者的头像
 - 赞我 #给你点10个赞,记得回赞哦
+- 个人信息 #字面意思
 </begin>
