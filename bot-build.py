@@ -18,6 +18,7 @@ from Resource.Code.mc_status import mc_get_status_ext as mc_get_status
 from Resource.Code.bot_func import group_import_func as gp_f
 from Resource.Code.bot_func import MakeMsgClass as m_f
 from Resource.Code.write_log import writeLog as writeLog
+from Resource.Code.UserInfoImg.main import BuildUserImgInfo
 import atexit
 
 
@@ -25,12 +26,13 @@ readme = ''
 with open('README.md', 'r') as rm:
     readme = rm.read()
 start = time.time()
-bot_version = 'v.1.1.4 - Beta'
+bot_version = 'v.1.1.5 - Beta'
 gp_f.setPort(3000)
 send_time = 0
 send_clamp = False
 log_file = ''
 def logChange():
+    #print('test')
     global log_file
     current_datetime = datetime.datetime.now()
     year = int(current_datetime.year)
@@ -100,18 +102,9 @@ async def idk_script(dict_msg:dict):
                 ]
             )
             return(True)
-        case '/bot-info' | '个人信息':
-            gp_f.send_group_msg(
-                dict_msg['group_info']['id'],
-                [
-                    m_f.makeMsgText('[XTHX_BOT - Beta Build]\n'),
-                    m_f.makeMsgText("暂时还没重构出来")
-                ]
-            )
-            return(True)
         case '/bot-say':
             del text[0]
-            if(len(text) == 0):
+            if(len(text) == 0 or dict_msg['sender']['id'] == dict_msg['self_id']):
                 return(False)
             else:
                 text[0] = text[0].strip()
@@ -165,7 +158,8 @@ async def idk_script(dict_msg:dict):
             gp_f.send_group_msg(
                 dict_msg['group_info']['id'],
                 [
-                    m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n机器人版本: {bot_version}\n{msg}\n运行时间: {res}秒\n服务器本地时间: {year}年{month}月{day}日-{hour}点{minute}分{second}秒")
+                    m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n机器人版本: {bot_version}\n{msg}\n运行时间: {res}秒\n服务器本地时间: {year}年{month}月{day}日-{hour}点{minute}分{second}秒"),
+                    m_f.makeMsgText("\n\nGithub Updated to 2025.10.24\nCode by XTHX_FORM")
                 ]
             )
             return(True)
@@ -327,6 +321,24 @@ async def idk_script(dict_msg:dict):
                     ]
                 )
             return(True)
+        case '个人信息' | '/bot-info':
+            num = dict_msg['sender']['id']
+            data = sign.sign_data[sign.findSignUserData(num)]
+            if('lv' in data == False or 'xp' in data == False):
+                data = sign.convertProfile(data)[0]
+            
+            BuildUserImgInfo(num , data['coin'] , data['lv'] , data['xp'])
+            time.sleep(0.5)
+            gp_f.send_group_msg(
+                dict_msg['group_info']['id'],
+                [
+                    m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n"),
+                    m_f.makeMsgAt(num),
+                    m_f.makeMsgImage(os.path.abspath(f"./Resource/Images/qqimg-{dict_msg['sender']['id']}.png")),
+                    m_f.makeMsgText(f"(测试阶段,不代表最终成品)")
+                ]
+            )
+            return(True)
         case 'readmd':
             gp_f.send_group_msg(
                 dict_msg['group_info']['id'],
@@ -339,6 +351,7 @@ async def idk_script(dict_msg:dict):
             return(False)
         
 async def judgeMsg(const_msg:dict):
+    # and const_msg['group_info']['id'] == '1036696409' 
     if(const_msg['status'] and const_msg['type'] == 'group'):
         await idk_script(const_msg)
         return(True)
@@ -349,14 +362,16 @@ async def judgeMsg(const_msg:dict):
 
     
 async def main():
+    #logChange()
     async with websockets.connect("ws://127.0.0.1:3001") as websocket:
         writeLog(log_file,'Debug',"已连接至服务器",True)
         async for message in websocket:
             logChange()
             msg = json.loads(message)
-            await judgeMsg(gp_f.parseWebMsg(msg))
+            p = gp_f.parseWebMsg(msg)  
+            await judgeMsg(p)
             #print(gp_f.parseWebMsg(msg))
-            #print(message)
+            #print(message) 
     
 while True:
     asyncio.run(main())
