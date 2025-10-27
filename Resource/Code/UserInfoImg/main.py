@@ -1,4 +1,5 @@
 from Resource.Code.UserInfoImg.XImg import MakeCustomImage as img
+#from XImg import MakeCustomImage as img
 import time
 import requests as get
 import json as js
@@ -12,10 +13,9 @@ def BuildUserImgInfo(qq:str , coin:int , lv:int , exp:int):
     qq_url = f"https://uapis.cn/api/v1/social/qq/userinfo?qq={qq}"
     rr = js.loads(get.get(qq_url).content)
     print(rr)
-
     # 基本信息
     name = (f"{rr['nickname'][:8]}..." if len(rr['nickname']) >=8 else rr['nickname'])
-    sign = f"{rr['long_nick'][:15]}..." if len(rr['long_nick']) > 15 else rr['long_nick']
+    sign = f"{rr['long_nick'][:15]}..." if len(rr['long_nick']) >= 15 else rr['long_nick']
     sex = rr['sex']
     age = rr['age']
     qid = rr['qid']
@@ -23,7 +23,7 @@ def BuildUserImgInfo(qq:str , coin:int , lv:int , exp:int):
     email = rr['email']
     is_vip = '有' if rr['is_vip'] else '没有'
     vip_level = rr['vip_level']
-    reg_time = rr['reg_time']
+    reg_time = rr['reg_time'][ : 4] + rr['reg_time'][10 : ]
     last_updated_time = rr['last_updated']
     # 棍木
     empty_str = '                       '
@@ -46,12 +46,15 @@ def BuildUserImgInfo(qq:str , coin:int , lv:int , exp:int):
 
     # 加载背景图
     bg_list = [
-        path + 'ddf05556b93b4610ad8845a5dfb52516.jpeg',
-        path + '20180723115531_relgt.jpg',
-        path + '20220710154932_da25b.jpg',
-        path + 'background.jpg'
+        path + '6.jpeg',
+        path + '1.jpg',
+        path + '2.jpg',
+        path + '3.jpg',
+        path + '4.jpg',
+        path + '5.jpg',
+        path + '7.jpg'
     ]
-    image = img(path + 'font.otf' , 70 , bg_list[random.randint(0,3)])
+    image = img(path + 'font.otf' , 70 , bg_list[random.randint(0,len(bg_list) - 1)])
     # 获取背景图长和宽 
     info = image.ImgInfo()
     # 调试
@@ -59,7 +62,7 @@ def BuildUserImgInfo(qq:str , coin:int , lv:int , exp:int):
     # 绘制半透明图
     image.DrawRect( ( 100 , 100 , info['width'] - 100 , info['height'] - 100 ) , fill = ( 64 , 64 , 64 , 150 ) )
     # 请输入文本
-    ai_text = '只有无畏前进,胜利才属于你的'
+    #ai_text = '只有无畏前进,胜利才属于你的'
     
     # 编辑图片
     image.EditImg(
@@ -85,6 +88,7 @@ def BuildUserImgInfo(qq:str , coin:int , lv:int , exp:int):
     time.sleep(0.5)
 
 if(__name__ == '__main__'):
+    BuildUserImgInfo('1069413063' , 0 , 0 , 0 )
     pass
 '''
 import requests

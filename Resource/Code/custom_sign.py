@@ -71,11 +71,13 @@ def convertProfile(data:dict):
         exp = t['xp']
     
     p = '档案缺失元素,已创建并移植了存档数据\n\n----------\n'
-    
     data.update({'xp':exp,'lv':level})
+    i = findSignUserData(data['user_id'])
+    sign_data[i] = data
+    saveUserProfile([sign_data , []])
     return([data,p + msg + f'总共获得经验值{exp_count}'])
 
-def userProfileSignIn (user_id , data:list):
+def userProfileSignIn (user_id , output:bool = False):
 
     i = findSignUserData(str(user_id))
     if(i == -1):
@@ -90,8 +92,12 @@ def userProfileSignIn (user_id , data:list):
 
     if(sign_data[i]['time'] == dateToFloat()):
         saveUserProfile([sign_data , []])
+        if(output):
+            return(True)
         return(f"({user_id})\n----------\n{mm}\n----------\n您今天已经签到过了\n使用/bot-info可查看目前拥有的硬币数")
     else:
+        if(output):
+            return(True)
         #if(user_data[f'{user_id}'].signDataTimes == dateToFloat())
             
         sign_data[i]['time'] = dateToFloat()
