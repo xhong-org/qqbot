@@ -1,27 +1,28 @@
-##¶ÁÎÒ (README.md)##
--´ËBOTÔ´ÂëÒÑÔÚGithub¿ªÔ´
-https://github.com/xhong-org/qqbot
-Ä¿Ç°ÈÔÈ»¿ª·¢ÖÐ
-Updated 2025.10.21(Beta)
+##è¯»æˆ‘ (README.md)##  
+-æ­¤BOTæºç å·²åœ¨Githubå¼€æº  
+https://github.com/xhong-org/qqbot  
+ç›®å‰ä»ç„¶å¼€å‘ä¸­  
+Updated 2025.10.21(Beta)  
 
-##Ö¸Áî°ïÖú##
-Legacy(Main): ¾É·ÖÖ§,ÏÖÔÚÒÀÈ»µ±×öÖ÷·ÖÖ§À´ÓÃ
-- /bot-sign #Ç©µ½,¿É»ñÈ¡Ó²±Ò,µ«ÊÇÔÚLegacy·ÖÖ§ºÁÎÞ×÷ÓÃ,Äã¿ÉÒÔ×ÔÖ÷¿ª·¢
-- /bot-info #²é¿´¸öÈËÐÅÏ¢.»ñÈ¡µ±Ç°Ó²±ÒÊýÒÔ¼°ÆäËûÐÅÏ¢,µ«ÊÇ²»°üÀ¨QQ¸öÈËÐÅÏ¢(ÒòÎªÎÒÍüÁËÐ´
-- /bot-say <text> #¿ÉÒÔÈÃbot·¢ËÍÏûÏ¢,µ«ÊÇ²¢Ã»ÓÐÆÁ±ÎÎ¥½û´Ê,¼òµ¥À´Ëµ,textÓÐÊ²Ã´¾Í·¢Ê²Ã´
-- /bot-help #ÓÃÓÚ²é¿´Ö¸ÁîÓÃ·¨
-- /bot-op <qq_num | at> #ÊÚÓèÄ³ÈËbot¹ÜÀíÈ¨ÏÞ,¿ÉÒÔÊäÈëQQºÅ»òÕßÔÚÈºÀïatÄ³ÈËÊÚÓè
-- /bot-deop <qq_num | at> #³·ÏúÄ³ÈËbotÈ¨ÏÞ,Í¬ÉÏ
-- /bot-status #²é¿´Ö÷»ú×´Ì¬
-- /bot-test #²âÊÔÓÃµÄ
-- /bot-reload #ÖØÐÂ¶ÁÈ¡µµ°¸ÎÄ¼þ
-- /bot-save #±£´æÅäÖÃÎÄ¼þ
-- /bot-update #ÖØÆôbotÓÃµÄ
-- /mc-cmd <command> #Í¨¹ýRconÏò·¢ËÍMCServerÃüÁî
-- /tps #²é¿´$mc_address±äÁ¿µÄµØÖ·µÄMinecraft·þÎñÆ÷µ±Ç°tps,½öÊÊºÏÓÃÓÚForge¶Ë·þÎñÆ÷
-- /list #²é¿´$mc_address±äÁ¿µÄµØÖ·µÄMinecraft·þÎñÆ÷µ±Ç°ÈËÊý
-- /s <message> #²é¿´$mc_address±äÁ¿µÄµØÖ·µÄMinecraft·þÎñÆ÷·¢ËÍÓÎÏ·ÏûÏ¢
-- /2fa-bind <key> #°ó¶¨2FAÃØÔ¿,ÉÏÏÞ10¸ö,µ±È»Äã¿ÉÒÔ¸Ä
-- /2fa-info #²é¿´µ±Ç°ÒÑ¾­°ó¶¨µÄ2FAÃØÔ¿,ÁôÒâID,Õâ¸öÊÇÓÃÀ´²Ù×÷½â°óÃØÔ¿ºÍ·¢ËÍÒ»´ÎÐÔÑéÖ¤ÂëµÄ²ÎÊý
-- /2fa-unbind <id> #½â°ó2FAÃØÔ¿,idÊÇÊ²Ã´¿´¿´ÉÏÃæ
-- /2fa-getcode <id> #»ñÈ¡Ò»´ÎÐÔÑéÖ¤Âë,ÓÐÐ§Ê±¼äÎª30Ãë,idÊÇÊ²Ã´¿´¿´ÉÏÃæ
+##æŒ‡ä»¤å¸®åŠ©##
+Legacy(Main): æ—§åˆ†æ”¯,çŽ°åœ¨ä¾ç„¶å½“åšä¸»åˆ†æ”¯æ¥ç”¨
+- /bot-sign #ç­¾åˆ°,å¯èŽ·å–ç¡¬å¸,ä½†æ˜¯åœ¨Legacyåˆ†æ”¯æ¯«æ— ä½œç”¨,ä½ å¯ä»¥è‡ªä¸»å¼€å‘
+- /bot-info #æŸ¥çœ‹ä¸ªäººä¿¡æ¯.èŽ·å–å½“å‰ç¡¬å¸æ•°ä»¥åŠå…¶ä»–ä¿¡æ¯,ä½†æ˜¯ä¸åŒ…æ‹¬QQä¸ªäººä¿¡æ¯(å› ä¸ºæˆ‘å¿˜äº†å†™
+- /bot-say <text> #å¯ä»¥è®©botå‘é€æ¶ˆæ¯,ä½†æ˜¯å¹¶æ²¡æœ‰å±è”½è¿ç¦è¯,ç®€å•æ¥è¯´,textæœ‰ä»€ä¹ˆå°±å‘ä»€ä¹ˆ
+- /bot-help #ç”¨äºŽæŸ¥çœ‹æŒ‡ä»¤ç”¨æ³•
+- /bot-op <qq_num | at> #æŽˆäºˆæŸäººbotç®¡ç†æƒé™,å¯ä»¥è¾“å…¥QQå·æˆ–è€…åœ¨ç¾¤é‡ŒatæŸäººæŽˆäºˆ
+- /bot-deop <qq_num | at> #æ’¤é”€æŸäººbotæƒé™,åŒä¸Š
+- /bot-status #æŸ¥çœ‹ä¸»æœºçŠ¶æ€
+- /bot-test #æµ‹è¯•ç”¨çš„
+- /bot-reload #é‡æ–°è¯»å–æ¡£æ¡ˆæ–‡ä»¶
+- /bot-save #ä¿å­˜é…ç½®æ–‡ä»¶
+- /bot-update #é‡å¯botç”¨çš„
+- /mc-cmd <command> #é€šè¿‡Rconå‘å‘é€MCServerå‘½ä»¤
+- /tps #æŸ¥çœ‹$mc_addresså˜é‡çš„åœ°å€çš„MinecraftæœåŠ¡å™¨å½“å‰tps,ä»…é€‚åˆç”¨äºŽForgeç«¯æœåŠ¡å™¨
+- /list #æŸ¥çœ‹$mc_addresså˜é‡çš„åœ°å€çš„MinecraftæœåŠ¡å™¨å½“å‰äººæ•°
+- /s <message> #æŸ¥çœ‹$mc_addresså˜é‡çš„åœ°å€çš„MinecraftæœåŠ¡å™¨å‘é€æ¸¸æˆæ¶ˆæ¯
+- /2fa-bind <key> #ç»‘å®š2FAç§˜é’¥,ä¸Šé™10ä¸ª,å½“ç„¶ä½ å¯ä»¥æ”¹
+- /2fa-info #æŸ¥çœ‹å½“å‰å·²ç»ç»‘å®šçš„2FAç§˜é’¥,ç•™æ„ID,è¿™ä¸ªæ˜¯ç”¨æ¥æ“ä½œè§£ç»‘ç§˜é’¥å’Œå‘é€ä¸€æ¬¡æ€§éªŒè¯ç çš„å‚æ•°
+- /2fa-unbind <id> #è§£ç»‘2FAç§˜é’¥,idæ˜¯ä»€ä¹ˆçœ‹çœ‹ä¸Šé¢
+- /2fa-getcode <id> #èŽ·å–ä¸€æ¬¡æ€§éªŒè¯ç ,æœ‰æ•ˆæ—¶é—´ä¸º30ç§’,idæ˜¯ä»€ä¹ˆçœ‹çœ‹ä¸Šé¢
+
