@@ -18,7 +18,10 @@ from Resource.Code.mc_status import mc_get_status_ext as mc_get_status
 from Resource.Code.bot_func import group_import_func as gp_f
 from Resource.Code.bot_func import MakeMsgClass as m_f
 from Resource.Code.write_log import writeLog as writeLog
+import Resource.Code.xibao as bao
+from Resource.Code.noGoodImg import GetOnlyImg
 from Resource.Code.UserInfoImg.main import BuildUserImgInfo
+
 import atexit
 
 
@@ -42,14 +45,14 @@ def logChange():
     log_file = f'./Resource/Logs/log-{year}-{month}-{day}.log'
     if(log_file != log and len(log) != 0):
         gp_f.send_group_msg(
-            '921654083',
+            '747059275',
             [
                 m_f.makeMsgText('[XTHX_BOT - Beta Build]\n'),
-                m_f.makeMsgText(f"\n({dict_msg['sender']['id']})\n日志上报中")
+                m_f.makeMsgText(f"\n日志上报中")
             ]
         )
         gp_f.send_group_msg(
-            '921654083',
+            '747059275',
             [
                 m_f.makeMsgFile(os.path.abspath(log))
             ]
@@ -92,7 +95,7 @@ async def idk_script(dict_msg:dict):
             )
             return(True)
         case '/bot-sign' | '签到':
-            s = sign.userProfileSignIn(dict_msg['sender']['id']  , [sign.sign_data , []])
+            s = sign.userProfileSignIn(dict_msg['sender']['id'] )
             gp_f.send_group_msg(
                 dict_msg['group_info']['id'],
                 [
@@ -159,7 +162,7 @@ async def idk_script(dict_msg:dict):
                 dict_msg['group_info']['id'],
                 [
                     m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n机器人版本: {bot_version}\n{msg}\n运行时间: {res}秒\n服务器本地时间: {year}年{month}月{day}日-{hour}点{minute}分{second}秒"),
-                    m_f.makeMsgText("\n\nGithub Updated to 2025.10.24\nCode by XTHX_FORM")
+                    m_f.makeMsgText("\n\nGithub Updated to 2025.10.27\nCode by XTHX_FORM")
                 ]
             )
             return(True)
@@ -171,6 +174,7 @@ async def idk_script(dict_msg:dict):
                 ]
             )
         case '我要亿张神秘小图片':
+            
             # 
             if(time.time() - send_time < 5):
                 if(send_clamp == False):
@@ -323,9 +327,9 @@ async def idk_script(dict_msg:dict):
             return(True)
         case '个人信息' | '/bot-info':
             num = dict_msg['sender']['id']
-            data = sign.sign_data[sign.findSignUserData(num)]
-            if('lv' in data == False or 'xp' in data == False):
-                data = sign.convertProfile(data)[0]
+            sign.userProfileSignIn(num , True)
+            _id = sign.findSignUserData(num)
+            data = sign.sign_data[_id]
             
             BuildUserImgInfo(num , data['coin'] , data['lv'] , data['xp'])
             time.sleep(0.5)
@@ -339,6 +343,82 @@ async def idk_script(dict_msg:dict):
                 ]
             )
             return(True)
+        case '喜报':
+            if(len(text) == 1):
+                gp_f.send_group_msg(
+                    dict_msg['group_info']['id'],
+                    [
+                        m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n你这啥也没写"),
+                    ]
+                )
+                return(True)
+            i = bao.xibao(text[1])
+            if(i):
+                gp_f.send_group_msg(
+                    dict_msg['group_info']['id'],
+                    [
+                        m_f.makeMsgImage(os.path.abspath('./Resource/Images/xibao.png')),
+                    ]
+                )
+            else:
+                gp_f.send_group_msg(
+                    dict_msg['group_info']['id'],
+                    [
+                        m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n悲报: 图片生成失败"),
+                    ]
+                )
+            return(True)
+        case '悲报':
+            if(len(text) == 1):
+                gp_f.send_group_msg(
+                    dict_msg['group_info']['id'],
+                    [
+                        m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n你这啥也没写"),
+                    ]
+                )
+                return(True)
+            i = bao.beibao(text[1])
+            if(i):
+                gp_f.send_group_msg(
+                    dict_msg['group_info']['id'],
+                    [
+                        m_f.makeMsgImage(os.path.abspath('./Resource/Images/beibao.png')),
+                    ]
+                )
+            else:
+                gp_f.send_group_msg(
+                    dict_msg['group_info']['id'],
+                    [
+                        m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n喜报: 图片生成失败"),
+                    ]
+                )
+            return(True)
+        case '我要一张正经图':
+            gp_f.send_group_msg(
+                dict_msg['group_info']['id'],
+                [
+                    m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n好的,请耐心等待")
+                ]
+            )
+            i = GetOnlyImg()
+            if(i):
+                gp_f.send_group_msg(
+                    dict_msg['group_info']['id'],
+                    [
+                        m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n"),
+                        m_f.makeMsgAt(dict_msg['sender']['id']),
+                        m_f.makeMsgImage(os.path.abspath('./Resource/Images/what_img.png')),
+                        m_f.makeMsgText(f"\n\n并非正经"),
+                    ]
+                )
+            else:
+                gp_f.send_group_msg(
+                    dict_msg['group_info']['id'],
+                    [
+                        m_f.makeMsgText(f"[XTHX_BOT - Beta Build]\n图片生成失败"),
+                    ]
+                )
+            return(True)
         case 'readmd':
             gp_f.send_group_msg(
                 dict_msg['group_info']['id'],
@@ -351,7 +431,7 @@ async def idk_script(dict_msg:dict):
             return(False)
         
 async def judgeMsg(const_msg:dict):
-    # and const_msg['group_info']['id'] == '1036696409' 
+    #   and const_msg['group_info']['id'] == '1036696409'
     if(const_msg['status'] and const_msg['type'] == 'group'):
         await idk_script(const_msg)
         return(True)
@@ -368,8 +448,16 @@ async def main():
         async for message in websocket:
             logChange()
             msg = json.loads(message)
-            p = gp_f.parseWebMsg(msg)  
-            await judgeMsg(p)
+            p = gp_f.parseWebMsg(msg)
+            try:
+                await judgeMsg(p)
+            except Exception as e:
+                gp_f.send_group_msg(
+                    p['group_info']['id'],
+                    [
+                        m_f.makeMsgText(f"发生了一个错误\n错误信息: {e}\n请联系开发者并将错误信息发给他\n\n非常感谢"),
+                    ]
+                )
             #print(gp_f.parseWebMsg(msg))
             #print(message) 
     
